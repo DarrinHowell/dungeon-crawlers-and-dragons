@@ -1,11 +1,12 @@
+'use strict';
+
 var map = [];
-var rooms = 0;
 var shadow = [];
 var visibility = 3;
 var COLS = 80;
 var ROWS = 60;
-var canvas = document.getElementById("grid");
-var context = canvas.getContext("2d");
+var canvas = document.getElementById('grid');
+var context = canvas.getContext('2d');
 var busyCoordinates = [];
 var player;
 var isShadowToggled = true;
@@ -21,20 +22,19 @@ class Player {
     this.xp = xp;
   }
 }
-  
-startGame()
-  
+
+startGame();
+
 function startGame() {
   createMap();
-  setTimeout(gameSetUp(), 1000)
+  setTimeout(gameSetUp(), 1000);
   function gameSetUp() {
     generatePlayer();
     addShadow();
     drawMap(0, 0, COLS, ROWS);
   }
-    
 }
-  
+
 function createMap() {
   for (var row = 0; row < ROWS; row++) {
     map.push([]);
@@ -76,15 +76,14 @@ function createMap() {
         }
       }
     }
-    if (map[y][x] != 1) {
+    if (map[y][x] !== 1) {
       map[y][x] = 1;
-      tiles++
+      tiles++;
     }
     errors = 0;
   }
-    
-};
-  
+}
+
 function addShadow() {
   var startX = (player.coords.x - visibility) < 0 ? 0 : player.coords.x - visibility;
   var startY = (player.coords.y - visibility) < 0 ? 0 : player.coords.y - visibility;
@@ -101,63 +100,62 @@ function addShadow() {
     }
   }
 }
-  
+
 function drawMap(startX, startY, endX, endY) {
   var color;
   for (var row = startY; row < endY; row++) {
     for (var col = startX; col < endX; col++) {
-      if (isShadowToggled && shadow[row][col] == 0) {
-        drawObject(col, row, "black");
+      if (isShadowToggled && shadow[row][col] === 0) {
+        drawObject(col, row, 'black');
       } else {
         switch (map[row][col]) {
         case 1:
-          color = "white";
+          color = 'white';
           break;
         case 2:
-          color = "blue";
+          color = 'blue';
           break;
         case 3:
-          color = "red";
+          color = 'red';
           break;
         case 4:
-          color = "green";
+          color = 'green';
           break;
         case 5:
-          color = "orange";
+          color = 'orange';
           break;
         default:
-          color = "grey";
+          color = 'grey';
         }
         drawObject(col, row, color);
-      } 
+      }
     }
   }
 }
-  
+
 function areCoordsFree(x, y) {
-  if (map[y][x] != 1) {
+  if (map[y][x] !== 1) {
     return false;
   }
   for (var i = 0; i < busyCoordinates.length; i++) {
     try {
-      if (busyCoordinates[i].x == x && busyCoordinates[i].y == y) {
+      if (busyCoordinates[i].x === x && busyCoordinates[i].y === y) {
         return false;
       }
     } catch (e) {
-      console.log("Error: " + e);
+      console.log('Error: ' + e);
     }
   }
   return true;
 }
-  
-  
+
 function addBusyCoords(x, y) {
   busyCoordinates.push({
     x: x,
     y: y
   });
 }
-  
+
 function generateValidCoords() {
   var x = Math.floor(Math.random() * COLS);
   var y = Math.floor(Math.random() * ROWS);
@@ -170,7 +168,7 @@ function generateValidCoords() {
     y: y
   };
 }
-  
+
 function generatePlayer() {
   var coords = generateValidCoords();
   player = new Player(1, 100, coords, 30);
@@ -181,7 +179,7 @@ function addObjToMap(coords, identifier) {
   map[coords.y][coords.x] = identifier;
   addBusyCoords(coords.x, coords.y);
 }
-  
+
 function drawObject(x, y, color) {
   context.beginPath();
   context.rect(x * 10, y * 10, 10, 10);
@@ -189,7 +187,7 @@ function drawObject(x, y, color) {
   context.fill();
 }
 
-$(document).keydown(function(e) {
+document.keydown(function(e) {
   var x = player.coords.x;
   var y = player.coords.y;
   var oldX = player.coords.x;
@@ -198,8 +196,6 @@ $(document).keydown(function(e) {
   case 37: //left
     x--;
     break;
-  case AA: 
-    x--;
   case 38: // up
     y--;
     break;
@@ -212,11 +208,11 @@ $(document).keydown(function(e) {
   default:
     return;
   }
-  if(map[y][x] != 0) {
-    if (map[y][x] == 4) {
+  if(map[y][x] !== 0) {
+    if (map[y][x] === 4) {
       player.health += POTIONS[Math.floor(Math.random() * POTIONS.length)];
       removeObjFromMap(x, y);
-    } else if (map[y][x] == 5) {
+    } else if (map[y][x] === 5) {
       player.weapon = WEAPONS[Math.floor(Math.random() * WEAPONS.length)];
       removeObjFromMap(x, y);
     }
@@ -225,39 +221,33 @@ $(document).keydown(function(e) {
   }
   e.preventDefault();
 });
-  
-function resetGame() {
-  busyCoordinates = [];
-  shadow = [];
-  map = [];
-}
-  
-function userWins() {
-  alert("YOU CONQUERED THE DUNGEON!");
-  resetGame();
-  startGame();
-};
-  
-function gameOver() {
-  alert("GAME OVER");
-  resetGame();
-  startGame();
-};
-  
+
+// function resetGame() {
+//   busyCoordinates = [];
+//   shadow = [];
+//   map = [];
+// }
+
+// function userWins() {
+//   alert("YOU CONQUERED THE DUNGEON!");
+//   resetGame();
+//   startGame();
+// }
+
 function removeObjFromMap(x, y) {
   map[y][x] = 1;
-};
-  
+}
+
 function updatePlayerPosition(oldX, oldY, newX, newY) {
   removeObjFromMap(oldX, oldY);
   map[newY][newX] = 2;
   player.coords = {x : newX, y : newY};
-    
+
   var startX = (oldX - visibility) < 0 ? 0 : oldX - visibility;
   var startY = (oldY - visibility) < 0 ? 0 : oldY - visibility;
   var endX = (newX + visibility) >= COLS ? COLS - 1 : newX + visibility;
   var endY = (newY + visibility) >= ROWS ? ROWS - 1 : newY + visibility;
-    
+
   if (oldX > newX) {
     startX = newX - visibility;
     endX = oldX + visibility;
@@ -276,8 +266,8 @@ function updatePlayerPosition(oldX, oldY, newX, newY) {
     }
   }
 }
-  
-function toggleShadow() {
-  isShadowToggled = !isShadowToggled;
-  drawMap(0, 0, COLS, ROWS);
-}
+
+// function toggleShadow() {
+//   isShadowToggled = !isShadowToggled;
+//   drawMap(0, 0, COLS, ROWS);
+// }
