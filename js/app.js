@@ -9,11 +9,13 @@ var canvas = document.getElementById('grid');
 var context = canvas.getContext('2d');
 var busyCoordinates = [];
 var player;
-var isShadowToggled = true;
+var isShadowToggled = false;
 var directions = [-1, 0, 1];
 var errors = 0;
 var maxErrorsCount = 1000;
 var minimumTilesAmount = 1000;
+var grid = document.getElementById('grid');
+document.addEventListener('keypress', keyInput);
 class Player {
   constructor(level, health, coords, xp) {
     this.level = level;
@@ -187,12 +189,13 @@ function drawObject(x, y, color) {
   context.fill();
 }
 
-document.keydown(function(e) {
+function keyInput(e) {
+  e.preventDefault();
   var x = player.coords.x;
   var y = player.coords.y;
   var oldX = player.coords.x;
   var oldY = player.coords.y;
-  switch (e.which) {
+  switch (e.keyCode) {
   case 37: //left
     x--;
     break;
@@ -209,30 +212,10 @@ document.keydown(function(e) {
     return;
   }
   if(map[y][x] !== 0) {
-    if (map[y][x] === 4) {
-      player.health += POTIONS[Math.floor(Math.random() * POTIONS.length)];
-      removeObjFromMap(x, y);
-    } else if (map[y][x] === 5) {
-      player.weapon = WEAPONS[Math.floor(Math.random() * WEAPONS.length)];
-      removeObjFromMap(x, y);
-    }
     updatePlayerPosition(player.coords.x, player.coords.y, x, y);
     drawMap(oldX - visibility - 1, oldY - visibility - 1, x + visibility + 2, y + visibility + 2);
   }
-  e.preventDefault();
-});
-
-// function resetGame() {
-//   busyCoordinates = [];
-//   shadow = [];
-//   map = [];
-// }
-
-// function userWins() {
-//   alert("YOU CONQUERED THE DUNGEON!");
-//   resetGame();
-//   startGame();
-// }
+};
 
 function removeObjFromMap(x, y) {
   map[y][x] = 1;
@@ -266,8 +249,3 @@ function updatePlayerPosition(oldX, oldY, newX, newY) {
     }
   }
 }
-
-// function toggleShadow() {
-//   isShadowToggled = !isShadowToggled;
-//   drawMap(0, 0, COLS, ROWS);
-// }
