@@ -51,3 +51,11 @@ as a backend developer developer, I want to create a leader board that records t
 
 as a backend developer I want to set event listeners onto the arrow keys as well as the w,a,s,d keys to record when players attempt to move their avatar through the dungeon. 
 
+adding enemies that can kill us and send us back to the start
+
+creating multiple levels through which to navigate
+
+adding in gems and treasures to boost one's score amidst navigating through the dungeon
+
+exponentially increasing the difficulty on the last level; adding a horde of enemies and very minimal escape routes
+
