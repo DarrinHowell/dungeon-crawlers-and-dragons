@@ -1,5 +1,4 @@
 
-
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500'); /* Raleway Font */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans'); /* Open Sans Font */
 @font-face {
@@ -12,28 +11,7 @@
 .colored {
     color: #E48632;
 }
-/* -Link Styling- */
-a {
-    color: #F39C12;
-    font-family: Raleway, sans-serif;
-	text-decoration: none;
-}
-a:visited {
-    color: #EEE;
-    text-decoration: none;
-}
-a:hover {
-    color: #E48632;
-	text-decoration: underline;
-}
-a:active {
-    color: #E48632;
-    text-decoration: underline;
-}
-a:focus {
-    color: #E48632;
-    text-decoration: none;
-}
+
 /* -Resets- */
 html, body { 
     background-color: #111;
@@ -51,7 +29,7 @@ html, body {
     padding-right: 0;
 }
 /* -Text Styling */
-h1,h2,h3,h4,h5,h6 {
+h1,h2,h3 {
 	font-family: Raleway, sans-serif;
 }
 h1 {
@@ -67,10 +45,7 @@ h3 {
     font-size: 1.25rem; /* 20px */
     font-weight: 400;
 }
-h4 {
-    font-size: 1.10rem;
-    font-weight: 300;
-}
+
 p {
     font-family: Open Sans, sans-serif;
     font-size: 0.9375rem; /* 15px */
@@ -124,39 +99,9 @@ ul {
 .large-margin {
 	margin-bottom: 12em; /* 192px */
 }
-/* -<hr>- */
-hr {
-    width: 100%;
-    height: 2px;
-    background: #E48632;
-    margin: 20px 0;
-    border: none;
-}
-.hr-short {
-    width: 100px;
-    height: 2px;
-    margin: 5px auto;
-}
-.short-hr-left::after {
-    border-top: 2px solid;
-    border-color: #E48632;
-    content: "";
-    display: block;
-    height: 1px;
-    width: 60px;
-    margin: 13px 0 0 0;
-}
-.short-hr-center::after {
-    border-top: 2px solid;
-    border-color: #E48632;
-    content: "";
-    display: block;
-    height: 1px;
-    width: 60px;
-    margin: 13px auto 0 auto;
-}
 
-/* - Button Styling Making it Beautiful */
+
+/* - Button Styling Making it Beautiful do you love it? */
 button {
     outline: none !important;
 }
