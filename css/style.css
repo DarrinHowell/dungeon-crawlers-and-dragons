@@ -354,10 +354,30 @@ canvas  {
     z-index: 5;
     text-align: center;
     height: 30px;
-    margin-bottom: 2vh;
+    margin-bottom: 42vh;
    
 }
 
+
+.game-input2 {
+    display: block;
+    position: relative;
+    margin-top: 10vh;
+    color: #FFF;
+	text-shadow: none; 
+    padding: 0px;
+    z-index: 5;
+    text-align: center;
+    height: 30px;
+    margin-bottom: -40vh;
+   
+}
+
+.username{
+margin-bottom: 4vh;
+margin-top: 10vh;
+
+}
 
 .hidden {
     display: none;
