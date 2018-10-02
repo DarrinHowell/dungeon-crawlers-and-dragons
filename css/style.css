@@ -358,6 +358,8 @@ canvas  {
    
 }
 
-/* Music Icon*/
 
+.hidden {
+    display: none;
+}
 
