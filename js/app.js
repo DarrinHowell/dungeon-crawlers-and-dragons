@@ -12,7 +12,7 @@ var busyCoordinates = [];
 var player;
 var ladder;
 var gem;
-var isShadowToggled = true;
+var isShadowToggled = false;
 var directions = [-1, 0, 1];
 var errors = 0;
 var maxErrorsCount = 1000;
@@ -242,10 +242,14 @@ function keyboardInputHandler(e) {
     return;
   }
   if(map[y][x] !== 0) {
+    player.score = player.score - 10;
     updatePlayerPosition(player.coords.x, player.coords.y, x, y, visibility[0]);
     drawMap(oldX - visibility[0] - 1, oldY - visibility[0] - 1, x + visibility[0] + 2, y + visibility[0] + 2);
+    if(x === gem.coords.x && y === gem.coords.y) {
+      player.score = player.score + 500;
+    }
     if(x === ladder.coords.x && y === ladder.coords.y) {
-      alert('you won');
+      alert('You WON! Your score was ' + player.score);
     }
   }
 }
