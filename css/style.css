@@ -357,3 +357,7 @@ canvas  {
     margin-bottom: 3vh;
    
 }
+
+.hidden {
+    display: none;
+}

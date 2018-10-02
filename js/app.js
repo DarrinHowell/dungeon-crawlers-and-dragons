@@ -21,7 +21,9 @@ var directions = [-1, 0, 1];
 var errors = 0;
 var maxErrorsCount = 1000;
 var minimumTilesAmount = 1000;
-document.addEventListener('keydown', keyboardInputHandler, false);
+var usernameForm = document.getElementById('username');
+var difficulty = parseInt(localStorage.getItem('difficulty'));
+usernameForm.addEventListener('submit', handleSubmit);
 function Player(userName, coords, score) {
   this.userName = userName;
   this.coords = coords;
@@ -38,19 +40,19 @@ function Pit(coords) {
   this.coords = coords;
 }
 
-startGame();
 
-function startGame() {
+function startGame(name) {
   createMap(mapSize[difficulty]);
   setTimeout(gameSetUp(), 1000);
   function gameSetUp() {
-    generatePlayer();
+    generatePlayer(name);
     generateLadder();
     generateGem();
     generatePit();
     addShadow(visibility[difficulty]);
     drawMap(0, 0, COLS, ROWS);
   }
+  document.addEventListener('keydown', keyboardInputHandler, false);
 }
 
 function createMap(mapSize) {
@@ -102,10 +104,10 @@ function createMap(mapSize) {
   }
 }
 
-function generatePlayer() {
+function generatePlayer(name) {
   var coords = generateValidCoords();
   startCoords = coords;
-  player = new Player('Tyler', coords, scores[difficulty]);
+  player = new Player(name, coords, scores[difficulty]);
   addObjToMap(player.coords, 2);
 }
 
@@ -281,6 +283,13 @@ function keyboardInputHandler(e) {
       alert('You WON! Your score was ' + player.score);
     }
   }
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  var username = e.target.name.value;
+  usernameForm.setAttribute('class', 'hidden');
+  startGame(username);
 }
 
 function updatePlayerPosition(oldX, oldY, newX, newY, difficulty) {
