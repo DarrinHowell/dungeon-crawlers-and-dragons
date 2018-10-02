@@ -156,7 +156,7 @@ hr {
     margin: 13px auto 0 auto;
 }
 
-/* -General Button Styles */
+/* - Button Styling Making it Beautiful */
 button {
     outline: none !important;
 }
@@ -260,125 +260,6 @@ button {
 }
 
 
-
-/* -- Buttons -- */
-.steam-btn {
-    display: inline-block;
-}
-.steam-btn a {
-    display: inline-block;
-    min-height: 55px;
-    min-width: 150px;
-    height: auto;
-    width: auto;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
-    border-radius: 3px;
-    padding: 6px;
-    border: none;
-    color: #F5F5F5;
-    cursor: pointer;
-    margin: 30px 0 0 0;
-}
-.steam-btn:hover a {
-    background: #000;
-    color: #FFF;
-}
-.steam-btn i {
-    float: left;
-}
-.steam-btn p {
-    float: right;
-    line-height: 20px;
-    font-weight: bold;
-}
-.button-store {
-    display: inline-block;
-    width: auto;
-    height: auto;
-    padding: 5px 22px;
-    border-radius: 5px;
-    margin: 30px 10px 0 0;
-    color: #FFF;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
-    border: none;
-    cursor: pointer;
-}
-.button-store:hover {
-    background: #000;
-    color: #FFF;
-}
-.button-store > i {
-    float: left;
-    display: inline;
-    margin-top: 5px;
-}
-.button-store  p {
-    float: right;
-    padding: 0 0 0 10px;
-}
-.reviews {
-    width: auto;
-    display: inline-block;
-    float: right;
-    margin: 20px 0 0 0 ;
-    text-align: center;
-}
-.reviews a {
-    color: #FFF;
-}
-.reviews a:hover {
-    color: #FFF;
-}
-.reviews a:active {
-    color: #FFF;
-}
-.reviews a:visited {
-    color: #FFF;
-}
-.score-card {
-    display: inline-block;
-    min-height: 70px;
-    min-width: 90px;
-    width: auto;
-    height: auto;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
-    text-align: center;
-    margin: 0 5px 0 0;
-    padding: 5px;
-    border-radius: 2px;
-}
-.score-card:hover {
-    background: #000;
-}
-.score-card:hover .score {
-    color: #E48632;
-}
-.score {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-top: 5px;
-    padding-bottom: 0;
-}
-.rating {
-    width: auto;
-    height: auto;
-    padding: 10px 20px;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
-    text-align: center;
-    float: right;
-    border-radius: 2px;
-    margin: 20px 0 0 0;
-}
-.rating ul {
-    margin: 0;
-}
-.rating ul li {
-    display: inline;
-    margin: 0 5px 0 0;
-}
-.rating p {
-    font-size: 1.5rem;
-}
 /* --------------------------- /////////// TEAM SECTION /////////// --------------------------- */
 #full-row {
     width: 100%;
@@ -428,9 +309,7 @@ button {
     font-size: 1.5rem;
     padding-bottom: 0;
 }
-.gallery-item {
-    padding: 0 2.5px;
-}
+
 .grid-level .row {
     margin: 0 0 5px 0;
 }
