@@ -36,14 +36,14 @@ function Gem(coords, appear) {
 }
 
 
-function startGame() {
-  createMap(mapSize[0]);
+function startGame(name) {
+  createMap(mapSize[difficulty]);
   setTimeout(gameSetUp(), 1000);
   function gameSetUp() {
-    generatePlayer();
+    generatePlayer(name);
     generateLadder();
     generateGem();
-    addShadow(visibility[0]);
+    addShadow(visibility[difficulty]);
     drawMap(0, 0, COLS, ROWS);
   }
 }
@@ -97,9 +97,9 @@ function createMap(mapSize) {
   }
 }
 
-function generatePlayer() {
+function generatePlayer(name) {
   var coords = generateValidCoords();
-  player = new Player('Tyler', coords);
+  player = new Player(name, coords);
   addObjToMap(player.coords, 2);
 }
 
