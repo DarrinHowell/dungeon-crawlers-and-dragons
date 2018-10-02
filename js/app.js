@@ -17,7 +17,11 @@ var directions = [-1, 0, 1];
 var errors = 0;
 var maxErrorsCount = 1000;
 var minimumTilesAmount = 1000;
+var usernameForm = document.getElementById('username');
+var difficulty = parseInt(localStorage.getItem('difficulty'));
+var div = document.getElementById('name-form');
 document.addEventListener('keydown', keyboardInputHandler, false);
+usernameForm.addEventListener('submit', startGame);
 function Player(userName, coords) {
   this.userName = userName;
   this.coords = coords;
