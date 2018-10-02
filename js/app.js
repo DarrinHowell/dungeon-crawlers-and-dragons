@@ -19,8 +19,6 @@ var maxErrorsCount = 1000;
 var minimumTilesAmount = 1000;
 var usernameForm = document.getElementById('username');
 var difficulty = parseInt(localStorage.getItem('difficulty'));
-var div = document.getElementById('name-form');
-document.addEventListener('keydown', keyboardInputHandler, false);
 usernameForm.addEventListener('submit', handleSubmit);
 function Player(userName, coords) {
   this.userName = userName;
@@ -46,6 +44,7 @@ function startGame(name) {
     addShadow(visibility[difficulty]);
     drawMap(0, 0, COLS, ROWS);
   }
+  document.addEventListener('keydown', keyboardInputHandler, false);
 }
 
 function createMap(mapSize) {
@@ -258,12 +257,10 @@ function keyboardInputHandler(e) {
 }
 
 function handleSubmit(e) {
-  div.setAttribute('class', 'hidden');
   e.preventDefault();
-  var username = e.target.username.value;
-  console.log(difficulty);
-  console.log(username);
-  startGame();
+  var username = e.target.name.value;
+  usernameForm.setAttribute('class', 'hidden');
+  startGame(username);
 }
 
 function updatePlayerPosition(oldX, oldY, newX, newY, difficulty) {
