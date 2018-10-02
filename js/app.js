@@ -2,26 +2,30 @@
 
 var map = [];
 var shadow = [];
-var visibility = [3, 4, 5];
+var visibility = [7, 5, 3];
 var mapSize = [10000, 20000, 30000];
+var scores = [1000, 1500, 2000];
+var pits = [3, 5, 7];
 var COLS = 80;
 var ROWS = 60;
 var canvas = document.getElementById('grid');
 var context = canvas.getContext('2d');
 var busyCoordinates = [];
 var player;
+var startCoords;
 var ladder;
 var gem;
-var isShadowToggled = false;
+var pit = [];
+var isShadowToggled = true;
 var directions = [-1, 0, 1];
 var errors = 0;
 var maxErrorsCount = 1000;
 var minimumTilesAmount = 1000;
 document.addEventListener('keydown', keyboardInputHandler, false);
-function Player(userName, coords) {
+function Player(userName, coords, score) {
   this.userName = userName;
   this.coords = coords;
-  this.score = 1000;
+  this.score = score;
 }
 function Ladder(coords) {
   this.coords = coords;
@@ -30,17 +34,21 @@ function Gem(coords, appear) {
   this.coords = coords;
   this.appear = appear;
 }
+function Pit(coords) {
+  this.coords = coords;
+}
 
 startGame();
 
 function startGame() {
-  createMap(mapSize[0]);
+  createMap(mapSize[difficulty]);
   setTimeout(gameSetUp(), 1000);
   function gameSetUp() {
     generatePlayer();
     generateLadder();
     generateGem();
-    addShadow(visibility[0]);
+    generatePit();
+    addShadow(visibility[difficulty]);
     drawMap(0, 0, COLS, ROWS);
   }
 }
@@ -96,7 +104,8 @@ function createMap(mapSize) {
 
 function generatePlayer() {
   var coords = generateValidCoords();
-  player = new Player('Tyler', coords);
+  startCoords = coords;
+  player = new Player('Tyler', coords, scores[difficulty]);
   addObjToMap(player.coords, 2);
 }
 
@@ -110,6 +119,14 @@ function generateGem() {
   var coords = generateValidCoords();
   gem = new Gem(coords, true);
   addObjToMap(gem.coords, 3);
+}
+
+function generatePit() {
+  for( var i = 0; i < pits[difficulty]; i++) {
+    var coords = generateValidCoords();
+    pit.push(new Pit(coords));
+    addObjToMap(pit[i].coords, 1);
+  }
 }
 
 function generateValidCoords() {
@@ -190,6 +207,9 @@ function drawMap(startX, startY, endX, endY) {
         case 4:
           color = 'green';
           break;
+        case 5:
+          color = 'red';
+          break;
         default:
           color = 'grey';
         }
@@ -242,9 +262,18 @@ function keyboardInputHandler(e) {
     return;
   }
   if(map[y][x] !== 0) {
-    player.score = player.score - 10;
-    updatePlayerPosition(player.coords.x, player.coords.y, x, y, visibility[0]);
-    drawMap(oldX - visibility[0] - 1, oldY - visibility[0] - 1, x + visibility[0] + 2, y + visibility[0] + 2);
+    player.score = player.score - 5;
+    for(var i = 0; i < pits[difficulty]; i++) {
+      if(x === pit[i].coords.x && y === pit[i].coords.y) {
+        isShadowToggled = false;
+        x = startCoords.x;
+        y = startCoords.y;
+        isShadowToggled = true;
+      }
+    }
+    updatePlayerPosition(player.coords.x, player.coords.y, x, y, visibility[difficulty]);
+    drawMap(oldX - visibility[difficulty] - 1, oldY - visibility[difficulty] - 1, x + visibility[difficulty] + 2, y + visibility[difficulty] + 2);
+    addShadow(visibility[difficulty]);
     if(x === gem.coords.x && y === gem.coords.y) {
       player.score = player.score + 500;
     }
