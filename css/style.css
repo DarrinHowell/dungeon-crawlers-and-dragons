@@ -354,10 +354,12 @@ canvas  {
     z-index: 5;
     text-align: center;
     height: 30px;
-    margin-bottom: 3vh;
+    margin-bottom: 2vh;
    
 }
+
 
 .hidden {
     display: none;
 }
+
