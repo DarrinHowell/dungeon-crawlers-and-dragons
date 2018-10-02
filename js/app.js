@@ -21,7 +21,7 @@ var usernameForm = document.getElementById('username');
 var difficulty = parseInt(localStorage.getItem('difficulty'));
 var div = document.getElementById('name-form');
 document.addEventListener('keydown', keyboardInputHandler, false);
-usernameForm.addEventListener('submit', startGame);
+usernameForm.addEventListener('submit', handleSubmit);
 function Player(userName, coords) {
   this.userName = userName;
   this.coords = coords;
@@ -35,7 +35,6 @@ function Gem(coords, appear) {
   this.appear = appear;
 }
 
-startGame();
 
 function startGame() {
   createMap(mapSize[0]);
@@ -252,6 +251,15 @@ function keyboardInputHandler(e) {
       alert('you won');
     }
   }
+}
+
+function handleSubmit(e) {
+  div.setAttribute('class', 'hidden');
+  e.preventDefault();
+  var username = e.target.username.value;
+  console.log(difficulty);
+  console.log(username);
+  startGame();
 }
 
 function updatePlayerPosition(oldX, oldY, newX, newY, difficulty) {
