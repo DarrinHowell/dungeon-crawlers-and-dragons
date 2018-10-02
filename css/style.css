@@ -320,3 +320,38 @@ button {
 #copyright {
     float: left;
 }
+
+
+/* --------------------------- /////////// Levels Page Game play/////////// --------------------------- */
+
+.gameBack {
+    background-color: #111;
+    background: url(../images/bg.png);
+    background-repeat: repeat;
+    min-height: 720px;
+    height: 100vh;
+}
+/* Insert Game Here*/
+#gameActual {
+    position: absolute;
+    top: 0;
+    background: none;
+    height: 100%;
+    width: 100%;
+}
+/* -Hero Image Caption- */
+.hero-caption {
+    display: block;
+    position: relative;
+    margin-top: 40vh;
+    color: #FFF;
+	text-shadow: none; 
+    padding: 20px;
+    z-index: 5;
+    text-align: center;
+}
+.hero-caption h1 {
+    font-weight: 300;
+    font-size: 3rem;
+    font-family: Raleway, sans-serif;
+}
