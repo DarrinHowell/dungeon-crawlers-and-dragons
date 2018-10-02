@@ -10,6 +10,7 @@ var canvas = document.getElementById('grid');
 var context = canvas.getContext('2d');
 var busyCoordinates = [];
 var player;
+var ladder;
 var isShadowToggled = true;
 var directions = [-1, 0, 1];
 var errors = 0;
@@ -18,6 +19,10 @@ var minimumTilesAmount = 1000;
 document.addEventListener('keydown', keyboardInputHandler, false);
 function Player(userName, coords) {
   this.userName = userName;
+  this.coords = coords;
+  this.score = 1000;
+}
+function Ladder(coords) {
   this.coords = coords;
 }
 
@@ -28,6 +33,7 @@ function startGame() {
   setTimeout(gameSetUp(), 1000);
   function gameSetUp() {
     generatePlayer();
+    generateLadder();
     addShadow(visibility[0]);
     drawMap(0, 0, COLS, ROWS);
   }
@@ -86,6 +92,12 @@ function generatePlayer() {
   var coords = generateValidCoords();
   player = new Player('Tyler', coords);
   addObjToMap(player.coords, 2);
+}
+
+function generateLadder() {
+  var coords = generateValidCoords();
+  ladder = new Ladder(coords);
+  addObjToMap(ladder.coords, 4);
 }
 
 function generateValidCoords() {
@@ -220,6 +232,9 @@ function keyboardInputHandler(e) {
   if(map[y][x] !== 0) {
     updatePlayerPosition(player.coords.x, player.coords.y, x, y, visibility[0]);
     drawMap(oldX - visibility[0] - 1, oldY - visibility[0] - 1, x + visibility[0] + 2, y + visibility[0] + 2);
+    if(x === ladder.coords.x && y === ladder.coords.y) {
+      alert('you won');
+    }
   }
 }
 
