@@ -191,7 +191,7 @@ function keyboardInputHandler(e) {
   switch (e.key) {
   case 'ArrowLeft': //left
     x--;
-    console.log(`Key pressed e.key`);
+    console.log('Key pressed e.key');
     break;
   case 'a': //left
     x--;
