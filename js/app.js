@@ -127,7 +127,7 @@ function generatePit() {
   for( var i = 0; i < pits[difficulty]; i++) {
     var coords = generateValidCoords();
     pit.push(new Pit(coords));
-    addObjToMap(pit[i].coords, 1);
+    addObjToMap(pit[i].coords, 5);
   }
 }
 
@@ -237,7 +237,6 @@ function keyboardInputHandler(e) {
   switch (e.key) {
   case 'ArrowLeft': //left
     x--;
-    console.log('Key pressed e.key');
     break;
   case 'a': //left
     x--;
@@ -267,15 +266,13 @@ function keyboardInputHandler(e) {
     player.score = player.score - 5;
     for(var i = 0; i < pits[difficulty]; i++) {
       if(x === pit[i].coords.x && y === pit[i].coords.y) {
-        isShadowToggled = false;
         x = startCoords.x;
         y = startCoords.y;
-        isShadowToggled = true;
       }
     }
     updatePlayerPosition(player.coords.x, player.coords.y, x, y, visibility[difficulty]);
     drawMap(oldX - visibility[difficulty] - 1, oldY - visibility[difficulty] - 1, x + visibility[difficulty] + 2, y + visibility[difficulty] + 2);
-    addShadow(visibility[difficulty]);
+    // addShadow(visibility[difficulty]);
     if(x === gem.coords.x && y === gem.coords.y) {
       player.score = player.score + 500;
     }
