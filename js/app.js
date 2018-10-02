@@ -15,7 +15,8 @@ var errors = 0;
 var maxErrorsCount = 1000;
 var minimumTilesAmount = 1000;
 var grid = document.getElementById('grid');
-document.addEventListener('keypress', keyInput);
+document.addEventListener('keydown', keyboardInputHandler, false);
+// document.addEventListener('keypress', keyInput);
 class Player {
   constructor(level, health, coords, xp) {
     this.level = level;
@@ -189,33 +190,48 @@ function drawObject(x, y, color) {
   context.fill();
 }
 
-function keyInput(e) {
+function keyboardInputHandler(e) {
   e.preventDefault();
   var x = player.coords.x;
   var y = player.coords.y;
   var oldX = player.coords.x;
   var oldY = player.coords.y;
-  switch (e.keyCode) {
-  case 37: //left
+  switch (e.key) {
+  case 'ArrowLeft': //left
     x--;
     break;
-  case 38: // up
+  case 'a': //left
+    x--;
+    break;
+  case 'ArrowUp': // up
     y--;
     break;
-  case 39: // right
+  case 'w': // up
+    y--;
+    break;
+  case 'ArrowRight': // right
     x++;
     break;
-  case 40: // down
+  case 'd': // right
+    x++;
+    break;
+  case 'ArrowDown': // down
+    y++;
+    break;
+  case 's': // down
     y++;
     break;
   default:
     return;
   }
+
+
+
   if(map[y][x] !== 0) {
     updatePlayerPosition(player.coords.x, player.coords.y, x, y);
     drawMap(oldX - visibility - 1, oldY - visibility - 1, x + visibility + 2, y + visibility + 2);
   }
-};
+}
 
 function removeObjFromMap(x, y) {
   map[y][x] = 1;
