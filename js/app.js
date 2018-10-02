@@ -11,6 +11,7 @@ var context = canvas.getContext('2d');
 var busyCoordinates = [];
 var player;
 var ladder;
+var gem;
 var isShadowToggled = true;
 var directions = [-1, 0, 1];
 var errors = 0;
@@ -25,6 +26,10 @@ function Player(userName, coords) {
 function Ladder(coords) {
   this.coords = coords;
 }
+function Gem(coords, appear) {
+  this.coords = coords;
+  this.appear = appear;
+}
 
 startGame();
 
@@ -34,6 +39,7 @@ function startGame() {
   function gameSetUp() {
     generatePlayer();
     generateLadder();
+    generateGem();
     addShadow(visibility[0]);
     drawMap(0, 0, COLS, ROWS);
   }
@@ -98,6 +104,12 @@ function generateLadder() {
   var coords = generateValidCoords();
   ladder = new Ladder(coords);
   addObjToMap(ladder.coords, 4);
+}
+
+function generateGem() {
+  var coords = generateValidCoords();
+  gem = new Gem(coords, true);
+  addObjToMap(gem.coords, 3);
 }
 
 function generateValidCoords() {
