@@ -431,7 +431,7 @@ button {
 .gallery-item {
     padding: 0 2.5px;
 }
-.grid-gallery .row {
+.grid-level .row {
     margin: 0 0 5px 0;
 }
 .overlay.gallery {
