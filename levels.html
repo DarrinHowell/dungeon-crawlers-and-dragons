@@ -29,7 +29,7 @@
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
             <div class="container">
                 <!-- Site Logo Do We Need One?-->
-                <a id="logo" class="navbar-brand" href="index.html"><img class="img-fluid" src="pic here" alt="TEAM LOGO NOT DONE"></a>
+                <a id="logo" class="navbar-brand" href="index.html"><h1>TEAM FIVE</h1></a>
                 
                 <!-- Navigation Links -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -50,15 +50,20 @@
 
                         <div id='soundButton' onClick="playpause()" ><img title='Music Playing' alt='Play The Music' src='images/soundon.png' /></div>
 
-                        <form id="username">
-                                <label for="name">Enter a username:</label>
-                                <input type="text" name="name">
-                                <button>Start Game</button>
-                        </form>
-
                     </div>
-                    
+               
             </div>
+            <div class="game-input2">
+         
+                    <form id="username">
+                            <label for="name">Enter a username:</label>
+                            <input type="text" name="name">
+                            <button>Start Game</button>
+                    </form>
+
+                </div>
+           
+        </div>
                     
                     
             <div id="gameBox">
@@ -93,8 +98,7 @@
     <script type="text/javascript">
         // Background Sound Play/Pause Script:
         // Description: Background Music Will Be On Via Click And And Will Be Off On Other Click With Image Change Also By Pure JavaScript.
-        // Copyright EXEIdeas International 2013. All Right Reserved.
-        function playpause() { var snd = document.getElementById("sound"); var snd_btn = document.getElementById("soundButton"); snd.muted = !snd.muted; if(snd.muted){ snd_btn.innerHTML = "<img alt='Pause The Music' title='Music Paused' src='images/soundoff.png' />"; } else{ snd_btn.innerHTML = "<img alt='Play The Music' title='Music Palying' src='images/soundon.png' />"; } }
+       function playpause() { var snd = document.getElementById("sound"); var snd_btn = document.getElementById("soundButton"); snd.muted = !snd.muted; if(snd.muted){ snd_btn.innerHTML = "<img alt='Pause The Music' title='Music Paused' src='images/soundoff.png' />"; } else{ snd_btn.innerHTML = "<img alt='Play The Music' title='Music Palying' src='images/soundon.png' />"; } }
         </script>
         <audio autoplay="true" loop="true" width="0" height="0" id="sound" src="audio/411867__ispeakwaves__mystery.mp3" type="audio/mp3" ></audio>
         <noembed><bgsound src="music.mp3" loop="infinite"/></noembed>
