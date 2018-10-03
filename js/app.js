@@ -112,8 +112,9 @@ function generatePlayer(name) {
 }
 
 function resetPlayer(x, y) {
-  player.x = x;
-  player.y = y;
+  drawObject(x, y, 'white');
+  player.coords.x = x;
+  player.coords.y = y;
   addObjToMap(player.coords, 2);
   wipeShadowAddShadow(visibility[difficulty]);
   drawMap(0, 0, COLS, ROWS);
@@ -292,6 +293,7 @@ function keyboardInputHandler(e) {
     player.score = player.score - 5;
     for(var i = 0; i < pits[difficulty]; i++) {
       if(x === pit[i].coords.x && y === pit[i].coords.y) {
+        removeObject(oldX, oldY);
         x = startCoords.x;
         y = startCoords.y;
         resetPlayer(x, y);
