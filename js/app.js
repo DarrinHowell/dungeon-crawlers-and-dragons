@@ -42,7 +42,7 @@ function Pit(coords) {
 
 
 function startGame(name) {
-  createMap(mapSize[difficulty]);
+  createMap(mapSize[difficulty], visibility[difficulty]);
   setTimeout(gameSetUp(), 1000);
   function gameSetUp() {
     generatePlayer(name);
@@ -55,7 +55,7 @@ function startGame(name) {
   document.addEventListener('keydown', keyboardInputHandler, false);
 }
 
-function createMap(mapSize) {
+function createMap(mapSize, border) {
   for (var row = 0; row < ROWS; row++) {
     map.push([]);
     for (var col = 0; col < COLS; col++) {
@@ -69,7 +69,7 @@ function createMap(mapSize) {
     var increment = directions[Math.floor(Math.random() * directions.length)];
     if (Math.random() < 0.5) {
       x += increment;
-      while (x <= 3 || x >= COLS - 4) {
+      while (x <= border || x >= COLS - border) {
         x += directions[Math.floor(Math.random() * directions.length)];
         errors++;
         if (errors > maxErrorsCount) {
@@ -83,7 +83,7 @@ function createMap(mapSize) {
       }
     } else {
       y += increment;
-      while (y <= 3 || y >= ROWS - 4) {
+      while (y <= border || y >= ROWS - border) {
         y += directions[Math.floor(Math.random() * directions.length)];
         errors++;
         if (errors > maxErrorsCount) {
@@ -109,6 +109,14 @@ function generatePlayer(name) {
   startCoords = coords;
   player = new Player(name, coords, scores[difficulty]);
   addObjToMap(player.coords, 2);
+}
+
+function resetPlayer(x, y) {
+  player.x = x;
+  player.y = y;
+  addObjToMap(player.coords, 2);
+  wipeShadowAddShadow(visibility[difficulty]);
+  drawMap(0, 0, COLS, ROWS);
 }
 
 function generateLadder() {
@@ -177,6 +185,24 @@ function addShadow(difficulty) {
   var startY = player.coords.y - difficulty;
   var endX = player.coords.x + difficulty;
   var endY = player.coords.y + difficulty;
+  for (var row = 0; row < ROWS; row++) {
+    shadow.push([]);
+    for (var col = 0; col < COLS; col++) {
+      if (row >= startY && row <= endY && col >= startX && col <= endX) {
+        shadow[row].push(1);
+      } else {
+        shadow[row].push(0);
+      }
+    }
+  }
+}
+
+function wipeShadowAddShadow(difficulty) {
+  var startX = player.coords.x - difficulty;
+  var startY = player.coords.y - difficulty;
+  var endX = player.coords.x + difficulty;
+  var endY = player.coords.y + difficulty;
+  shadow = [];
   for (var row = 0; row < ROWS; row++) {
     shadow.push([]);
     for (var col = 0; col < COLS; col++) {
@@ -268,11 +294,12 @@ function keyboardInputHandler(e) {
       if(x === pit[i].coords.x && y === pit[i].coords.y) {
         x = startCoords.x;
         y = startCoords.y;
+        resetPlayer(x, y);
+        break;
       }
     }
     updatePlayerPosition(player.coords.x, player.coords.y, x, y, visibility[difficulty]);
     drawMap(oldX - visibility[difficulty] - 1, oldY - visibility[difficulty] - 1, x + visibility[difficulty] + 2, y + visibility[difficulty] + 2);
-    // addShadow(visibility[difficulty]);
     if(x === gem.coords.x && y === gem.coords.y) {
       player.score = player.score + 500;
     }
