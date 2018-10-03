@@ -322,3 +322,4 @@ function updatePlayerPosition(oldX, oldY, newX, newY, difficulty) {
 function removeObject(x, y) {
   map[y][x] = 1;
 }
+
