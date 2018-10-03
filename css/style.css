@@ -376,6 +376,12 @@ canvas  {
    
 }
 
+#score {
+    position: absolute;
+    left: 51vh;
+    top: 12vh;
+}
+
 
 .game-input2 {
     display: block;
