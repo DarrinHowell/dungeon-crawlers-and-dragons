@@ -310,6 +310,21 @@ button {
     opacity: 1;
 }
 
+#easy:hover {
+    color: #E48632;
+    opacity: 1;
+}
+
+#medium:hover {
+    color: #E48632;
+    opacity: 10;
+}
+
+#hard:hover {
+    color: #E48632;
+    opacity: 1;
+}
+
 
 /* --------------------------- /////////// FOOTER /////////// --------------------------- */
 #footer {
