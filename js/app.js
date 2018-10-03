@@ -24,6 +24,7 @@ var minimumTilesAmount = 1000;
 var usernameForm = document.getElementById('username');
 var difficulty = parseInt(localStorage.getItem('difficulty'));
 var leaderboard = [];
+var scoreDisplay = document.getElementById('score');
 usernameForm.addEventListener('submit', handleSubmit);
 function Player(userName, coords, score) {
   this.userName = userName;
@@ -292,6 +293,7 @@ function keyboardInputHandler(e) {
   }
   if(map[y][x] !== 0) {
     player.score = player.score - 5;
+    scoreDisplay.innerHTML = '<h2>Score: ' + player.score + '</h2>';
     if (player.score === 0) {
       endGame();
     }
@@ -308,6 +310,7 @@ function keyboardInputHandler(e) {
     drawMap(oldX - visibility[difficulty] - 1, oldY - visibility[difficulty] - 1, x + visibility[difficulty] + 2, y + visibility[difficulty] + 2);
     if(x === gem.coords.x && y === gem.coords.y) {
       player.score = player.score + 500;
+      scoreDisplay.innerHTML = '<h2>Score: ' + player.score + '</h2>';
     }
     if(x === ladder.coords.x && y === ladder.coords.y) {
       endGame();
@@ -319,7 +322,9 @@ function handleSubmit(e) {
   e.preventDefault();
   var username = e.target.name.value;
   usernameForm.setAttribute('class', 'hidden');
+  scoreDisplay.removeAttribute('class');
   startGame(username);
+  scoreDisplay.innerHTML = '<h2>Score: ' + player.score + '</h2>';
 }
 
 function updatePlayerPosition(oldX, oldY, newX, newY, difficulty) {
