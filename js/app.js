@@ -361,9 +361,11 @@ function Score(name, score) {
 
 function endGame() {
   var existingUser = false;
+  var div = document.getElementsByClassName('game-input2')[0];
   document.removeEventListener('keydown', keyboardInputHandler, false);
   if (player.score === 0) {
-    alert('You have run out of points and lost :(');
+    div.innerHTML = '<p>You have run out of points and lost :(</p> <a href="index.html#howTo"><p>Play Again</p></a>';
+    div.setAttribute('class', 'end-screen1');
   }
   else if (localStorage.getItem('leaderboard')) {
     leaderboard = JSON.parse(localStorage.getItem('leaderboard'));
@@ -371,16 +373,19 @@ function endGame() {
       if (leaderboard[i].name === player.userName) {
         existingUser = true;
         if (player.score > leaderboard[i].score) {
-          alert('Congrats ' + player.userName + ' you got a new high score of ' + player.score + '!');
+          div.innerHTML = '<p>Well done ' + player.userName + ', you earned a new high score of ' + player.score + '!</p> <a href="index.html#howTo"><p>Play Again</p></a>';
+          div.setAttribute('class', 'end-screen2');
           leaderboard[i].score = player.score;
           sortScores();
           localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
         }
         else if (player.score < leaderboard[i].score) {
-          alert('Well done ' + player.userName + '. You made it to the end and earned a score of ' + player.score + '. Your current high score is ' + leaderboard[i].score);
+          div.innerHTML = '<p>Well done ' + player.userName + '! You made it to the end and earned a score of ' + player.score + '. Your current high score is ' + leaderboard[i].score + '.</p> <a href="index.html#howTo"><p>Play Again</p></a>';
+          div.setAttribute('class', 'end-screen3');
         }
         else {
-          alert('Well done ' + player.userName + '. You made it to the end and earned a score of ' + player.score + ', tying your high score.');
+          div.innerHTML = '<p>Well done ' + player.userName + '! You made it to the end and earned a score of ' + player.score + ', tying your high score.</p> <a href="index.html#howTo"><p>Play Again</p></a>';
+          div.setAttribute('class', 'end-screen4');
         }
         break;
       }
@@ -390,15 +395,15 @@ function endGame() {
       new Score(player.userName, player.score);
       sortScores();
       localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
-      alert('Well done ' + player.userName + '. You made it to the end and earned a score of ' + player.score);
+      div.innerHTML = '<p>Well done ' + player.userName + '! You made it to the end earned a score of ' + player.score + '!</p> <a href="index.html#howTo"><p>Play Again</p></a>';
+      div.setAttribute('class', 'end-screen2');
     }
-    console.log(leaderboard);
   }
   else {
     new Score(player.userName, player.score);
     localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
-    alert('Well done ' + player.userName + '. You made it to the end and earned a score of ' + player.score);
-    console.log(leaderboard);
+    div.innerHTML = '<p>Well done ' + player.userName + '! You made it to the end earned a score of ' + player.score + '!</p> <a href="index.html#howTo"><p>Play Again</p></a>';
+    div.setAttribute('class', 'end-screen2');
   }
 }
 
