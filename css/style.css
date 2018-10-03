@@ -398,7 +398,7 @@ margin-top: 10vh;
     margin-right: auto;
     color: #FFF;
 	text-shadow: none; 
-    padding: 0px;
+    padding: 1px;
     z-index: 5;
     text-align: center;
     height: 80px;
@@ -426,7 +426,7 @@ a p {
     padding: 0px;
     z-index: 5;
     text-align: center;
-    height: 100px;
+    height: 80px;
     width: 500px;
     margin-bottom: -40vh;
 }
@@ -440,7 +440,7 @@ a p {
     margin-right: auto;
     color: #FFF;
 	text-shadow: none; 
-    padding: 0px;
+    padding: 1px;
     z-index: 5;
     text-align: center;
     height: 100px;
@@ -457,7 +457,7 @@ a p {
     margin-right: auto;
     color: #FFF;
 	text-shadow: none; 
-    padding: 0px;
+    padding: 1px;
     z-index: 5;
     text-align: center;
     height: 100px;
