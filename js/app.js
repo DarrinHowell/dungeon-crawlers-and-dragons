@@ -6,7 +6,7 @@ var visibility = [7, 5, 3];
 var mapSize = [10000, 20000, 30000];
 var scores = [1000, 1500, 2000];
 var pits = [3, 5, 7];
-var ladderCoordsRange = [20, 30, 40];
+var ladderCoordsRange = [8, 12, 16];
 var COLS = 80;
 var ROWS = 60;
 var canvas = document.getElementById('grid');
@@ -191,10 +191,10 @@ function areLadderCoordsFree(x, y) {
     return false;
   }
   for(var i = 0; i < ladderCoordsRange[difficulty]; i++){
-    if(player.coords.x + i === ladder.coords.x ||
-        player.coords.x - i === ladder.coords.x ||
-        player.coords.y + i === ladder.coords.y ||
-        player.coords.y - i === ladder.coords.y){
+    if(player.coords.x + i === x ||
+        player.coords.x - i === x ||
+        player.coords.y + i === y ||
+        player.coords.y - i === y){
       return false;
     }
   }
