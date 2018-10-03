@@ -70,7 +70,7 @@ function createMap(mapSize, border) {
     var increment = directions[Math.floor(Math.random() * directions.length)];
     if (Math.random() < 0.5) {
       x += increment;
-      while (x <= border || x >= COLS - border) {
+      while (x <= (border + 1) || x >= COLS - (border + 1)) {
         x += directions[Math.floor(Math.random() * directions.length)];
         errors++;
         if (errors > maxErrorsCount) {
@@ -84,7 +84,7 @@ function createMap(mapSize, border) {
       }
     } else {
       y += increment;
-      while (y <= border || y >= ROWS - border) {
+      while (y <= (border + 1) || y >= ROWS - (border + 1)) {
         y += directions[Math.floor(Math.random() * directions.length)];
         errors++;
         if (errors > maxErrorsCount) {
