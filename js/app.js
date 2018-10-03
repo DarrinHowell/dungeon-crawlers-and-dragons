@@ -16,13 +16,14 @@ var startCoords;
 var ladder;
 var gem;
 var pit = [];
-var isShadowToggled = true;
+var isShadowToggled = false;
 var directions = [-1, 0, 1];
 var errors = 0;
 var maxErrorsCount = 1000;
 var minimumTilesAmount = 1000;
 var usernameForm = document.getElementById('username');
 var difficulty = parseInt(localStorage.getItem('difficulty'));
+var leaderboard = [];
 usernameForm.addEventListener('submit', handleSubmit);
 function Player(userName, coords, score) {
   this.userName = userName;
@@ -291,6 +292,9 @@ function keyboardInputHandler(e) {
   }
   if(map[y][x] !== 0) {
     player.score = player.score - 5;
+    if (player.score === 0) {
+      endGame();
+    }
     for(var i = 0; i < pits[difficulty]; i++) {
       if(x === pit[i].coords.x && y === pit[i].coords.y) {
         removeObject(oldX, oldY);
@@ -306,7 +310,7 @@ function keyboardInputHandler(e) {
       player.score = player.score + 500;
     }
     if(x === ladder.coords.x && y === ladder.coords.y) {
-      alert('You WON! Your score was ' + player.score);
+      endGame();
     }
   }
 }
@@ -349,3 +353,72 @@ function removeObject(x, y) {
   map[y][x] = 1;
 }
 
+function Score(name, score) {
+  this.name = name;
+  this.score = score;
+  leaderboard.push(this);
+}
+
+function endGame() {
+  var existingUser = false;
+  var div = document.getElementsByClassName('game-input2')[0];
+  document.removeEventListener('keydown', keyboardInputHandler, false);
+  if (player.score === 0) {
+    div.innerHTML = '<p>You have run out of points and lost :(</p> <a href="index.html#howTo"><p>Play Again</p></a>';
+    div.setAttribute('class', 'end-screen1');
+  }
+  else if (localStorage.getItem('leaderboard')) {
+    leaderboard = JSON.parse(localStorage.getItem('leaderboard'));
+    for (var i =0; i <leaderboard.length; i++) {
+      if (leaderboard[i].name === player.userName) {
+        existingUser = true;
+        if (player.score > leaderboard[i].score) {
+          div.innerHTML = '<p>Well done ' + player.userName + ', you earned a new high score of ' + player.score + '!</p> <a href="index.html#howTo"><p>Play Again</p></a>';
+          div.setAttribute('class', 'end-screen2');
+          leaderboard[i].score = player.score;
+          sortScores();
+          localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+        }
+        else if (player.score < leaderboard[i].score) {
+          div.innerHTML = '<p>Well done ' + player.userName + '! You made it to the end and earned a score of ' + player.score + '. Your current high score is ' + leaderboard[i].score + '.</p> <a href="index.html#howTo"><p>Play Again</p></a>';
+          div.setAttribute('class', 'end-screen3');
+        }
+        else {
+          div.innerHTML = '<p>Well done ' + player.userName + '! You made it to the end and earned a score of ' + player.score + ', tying your high score.</p> <a href="index.html#howTo"><p>Play Again</p></a>';
+          div.setAttribute('class', 'end-screen4');
+        }
+        break;
+      }
+    }
+
+    if (!existingUser) {
+      new Score(player.userName, player.score);
+      sortScores();
+      localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+      div.innerHTML = '<p>Well done ' + player.userName + '! You made it to the end earned a score of ' + player.score + '!</p> <a href="index.html#howTo"><p>Play Again</p></a>';
+      div.setAttribute('class', 'end-screen2');
+    }
+  }
+  else {
+    new Score(player.userName, player.score);
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+    div.innerHTML = '<p>Well done ' + player.userName + '! You made it to the end earned a score of ' + player.score + '!</p> <a href="index.html#howTo"><p>Play Again</p></a>';
+    div.setAttribute('class', 'end-screen2');
+  }
+}
+
+function sortScores() {
+  leaderboard.sort(function (a, b) {
+    var scoreA = a.score;
+    var scoreB = b.score;
+
+    if (scoreA < scoreB) {
+      return 1;
+    }
+    if (scoreA > scoreB) {
+      return -1;
+    }
+
+    return 0;
+  });
+}
