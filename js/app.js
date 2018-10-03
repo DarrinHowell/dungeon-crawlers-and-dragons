@@ -23,6 +23,7 @@ var maxErrorsCount = 1000;
 var minimumTilesAmount = 1000;
 var usernameForm = document.getElementById('username');
 var difficulty = parseInt(localStorage.getItem('difficulty'));
+var leaderboard = [];
 usernameForm.addEventListener('submit', handleSubmit);
 function Player(userName, coords, score) {
   this.userName = userName;
@@ -265,6 +266,9 @@ function keyboardInputHandler(e) {
   }
   if(map[y][x] !== 0) {
     player.score = player.score - 5;
+    if (player.score === 0) {
+      endGame();
+    }
     for(var i = 0; i < pits[difficulty]; i++) {
       if(x === pit[i].coords.x && y === pit[i].coords.y) {
         isShadowToggled = false;
@@ -280,7 +284,7 @@ function keyboardInputHandler(e) {
       player.score = player.score + 500;
     }
     if(x === ladder.coords.x && y === ladder.coords.y) {
-      alert('You WON! Your score was ' + player.score);
+      endGame();
     }
   }
 }
@@ -321,4 +325,14 @@ function updatePlayerPosition(oldX, oldY, newX, newY, difficulty) {
 
 function removeObject(x, y) {
   map[y][x] = 1;
+}
+
+function endGame() {
+  if (player.score === 0) {
+    alert('You have run out of points and lost :(');
+  }
+  else if (localStorage.getItem('leaderboard')) {
+    leaderboard = JSON.parse(localStorage.getItem('leaderboard'));
+    console.log(leaderboard);
+  }
 }
