@@ -198,9 +198,9 @@ function areLadderCoordsFree(x, y) {
       return false;
     }
   }
-  for (var i = 0; i < busyCoordinates.length; i++) {
+  for (var j = 0; j < busyCoordinates.length; j++) {
     try {
-      if (busyCoordinates[i].x === x && busyCoordinates[i].y === y) {
+      if (busyCoordinates[j].x === x && busyCoordinates[j].y === y) {
         return false;
       }
     } catch (e) {
