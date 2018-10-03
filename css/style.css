@@ -406,14 +406,6 @@ margin-top: 10vh;
     margin-bottom: -40vh;
 }
 
-a p {
-    width: 100px;
-    margin: auto;
-    text-decoration: none;
-    color: #FFF;
-    background: #c70000;
-}
-
 .end-screen2 { 
     background: #070707;
     display: block;
@@ -463,4 +455,12 @@ a p {
     height: 100px;
     width: 500px;
     margin-bottom: -40vh;
+}
+
+a p {
+    background: #E48632;
+    color: #FFF;
+    margin: auto;
+    text-decoration: none;
+    width: 100px;
 }
