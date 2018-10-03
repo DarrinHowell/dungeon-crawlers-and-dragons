@@ -48,7 +48,7 @@ function viewLeaderboard() {
   }
   else {
     var noBoard = document.createElement('p');
-    noBoard.textContent = 'There is currently no high scores saved. Go play a game to see you name here!';
+    noBoard.textContent = 'There are currently no high scores saved. Go play a game to see your name here!';
     modal.appendChild(noBoard);
   }
 }
