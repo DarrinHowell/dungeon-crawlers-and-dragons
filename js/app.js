@@ -16,13 +16,14 @@ var startCoords;
 var ladder;
 var gem;
 var pit = [];
-var isShadowToggled = true;
+var isShadowToggled = false;
 var directions = [-1, 0, 1];
 var errors = 0;
 var maxErrorsCount = 1000;
 var minimumTilesAmount = 1000;
 var usernameForm = document.getElementById('username');
 var difficulty = parseInt(localStorage.getItem('difficulty'));
+var leaderboard = [];
 usernameForm.addEventListener('submit', handleSubmit);
 function Player(userName, coords, score) {
   this.userName = userName;
@@ -291,6 +292,9 @@ function keyboardInputHandler(e) {
   }
   if(map[y][x] !== 0) {
     player.score = player.score - 5;
+    if (player.score === 0) {
+      endGame();
+    }
     for(var i = 0; i < pits[difficulty]; i++) {
       if(x === pit[i].coords.x && y === pit[i].coords.y) {
         removeObject(oldX, oldY);
@@ -306,7 +310,7 @@ function keyboardInputHandler(e) {
       player.score = player.score + 500;
     }
     if(x === ladder.coords.x && y === ladder.coords.y) {
-      alert('You WON! Your score was ' + player.score);
+      endGame();
     }
   }
 }
@@ -349,3 +353,67 @@ function removeObject(x, y) {
   map[y][x] = 1;
 }
 
+function Score(name, score) {
+  this.name = name;
+  this.score = score;
+  leaderboard.push(this);
+}
+
+function endGame() {
+  var existingUser = false;
+  document.removeEventListener('keydown', keyboardInputHandler, false);
+  if (player.score === 0) {
+    alert('You have run out of points and lost :(');
+  }
+  else if (localStorage.getItem('leaderboard')) {
+    leaderboard = JSON.parse(localStorage.getItem('leaderboard'));
+    for (var i =0; i <leaderboard.length; i++) {
+      if (leaderboard[i].name === player.userName) {
+        existingUser = true;
+        if (player.score > leaderboard[i].score) {
+          alert('Congrats ' + player.userName + ' you got a new high score of ' + player.score + '!');
+          leaderboard[i].score = player.score;
+          sortScores();
+          localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+        }
+        else if (player.score < leaderboard[i].score) {
+          alert('Well done ' + player.userName + '. You made it to the end and earned a score of ' + player.score + '. Your current high score is ' + leaderboard[i].score);
+        }
+        else {
+          alert('Well done ' + player.userName + '. You made it to the end and earned a score of ' + player.score + ', tying your high score.');
+        }
+        break;
+      }
+    }
+
+    if (!existingUser) {
+      new Score(player.userName, player.score);
+      sortScores();
+      localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+      alert('Well done ' + player.userName + '. You made it to the end and earned a score of ' + player.score);
+    }
+    console.log(leaderboard);
+  }
+  else {
+    new Score(player.userName, player.score);
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+    alert('Well done ' + player.userName + '. You made it to the end and earned a score of ' + player.score);
+    console.log(leaderboard);
+  }
+}
+
+function sortScores() {
+  leaderboard.sort(function (a, b) {
+    var scoreA = a.score;
+    var scoreB = b.score;
+
+    if (scoreA < scoreB) {
+      return 1;
+    }
+    if (scoreA > scoreB) {
+      return -1;
+    }
+
+    return 0;
+  });
+}
