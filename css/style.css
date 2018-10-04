@@ -377,9 +377,11 @@ canvas  {
 }
 
 #score {
-    position: absolute;
-    left: 51vh;
-    top: 12vh;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vh;
+    text-align: center;
 }
 
 
@@ -452,10 +454,10 @@ margin-top: 10vh;
     margin-right: auto;
     color: #FFF;
 	text-shadow: none; 
-    padding: 1px;
+    padding: 4px;
     z-index: 5;
     text-align: center;
-    height: 100px;
+    height: 105px;
     width: 500px;
     margin-bottom: -40vh;
 }
