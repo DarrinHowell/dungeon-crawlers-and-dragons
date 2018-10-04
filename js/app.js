@@ -17,7 +17,7 @@ var startCoords;
 var ladder;
 var gem;
 var pit = [];
-var isShadowToggled = true;
+var isShadowToggled = false;
 var directions = [-1, 0, 1];
 var errors = 0;
 var maxErrorsCount = 1000;
