@@ -16,7 +16,7 @@ var startCoords;
 var ladder;
 var gem;
 var pit = [];
-var isShadowToggled = false;
+var isShadowToggled = true;
 var directions = [-1, 0, 1];
 var errors = 0;
 var maxErrorsCount = 1000;
@@ -138,7 +138,7 @@ function generatePit() {
   for( var i = 0; i < pits[difficulty]; i++) {
     var coords = generateValidCoords();
     pit.push(new Pit(coords));
-    addObjToMap(pit[i].coords, 5);
+    addObjToMap(pit[i].coords, 1);
   }
 }
 
