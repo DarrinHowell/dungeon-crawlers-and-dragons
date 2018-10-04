@@ -26,6 +26,7 @@ var minimumTilesAmount = 1000;
 var difficulty = parseInt(localStorage.getItem('difficulty'));
 var leaderboard = [];
 new Score('Darrin', 10);
+new Score('TheLegend27', 1000000);
 localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
 var scoreDisplay = document.getElementById('score');
 // usernameForm.addEventListener('submit', handleSubmit);
@@ -425,7 +426,6 @@ function endGame() {
           div.innerHTML = '<p>Well done ' + player.userName + ', you earned a new high score of ' + player.score + '!</p> <a href="index.html#howTo"><p>Play Again</p></a>';
           div.setAttribute('class', 'end-screen2');
           leaderboard[i].score = player.score;
-          new Score('TheLegend27', 1000000);
           sortScores();
           localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
         }
