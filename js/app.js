@@ -17,16 +17,19 @@ var startCoords;
 var ladder;
 var gem;
 var pit = [];
-var isShadowToggled = true;
+var isShadowToggled = false;
 var directions = [-1, 0, 1];
 var errors = 0;
 var maxErrorsCount = 1000;
 var minimumTilesAmount = 1000;
-var usernameForm = document.getElementById('username');
+// var usernameForm = document.getElementById('username');
 var difficulty = parseInt(localStorage.getItem('difficulty'));
 var leaderboard = [];
+new Score('Darrin', 10);
+localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
 var scoreDisplay = document.getElementById('score');
-usernameForm.addEventListener('submit', handleSubmit);
+// usernameForm.addEventListener('submit', handleSubmit);
+startGame('Darrin');
 function Player(userName, coords, score) {
   this.userName = userName;
   this.coords = coords;
@@ -56,6 +59,8 @@ function startGame(name) {
     drawMap(0, 0, COLS, ROWS);
   }
   document.addEventListener('keydown', keyboardInputHandler, false);
+  scoreDisplay.innerHTML = '<h2>Score: ' + player.score + '</h2>';
+  scoreDisplay.removeAttribute('class');
 }
 
 function createMap(mapSize, border) {
@@ -139,7 +144,7 @@ function generatePit() {
   for( var i = 0; i < pits[difficulty]; i++) {
     var coords = generateValidCoords();
     pit.push(new Pit(coords));
-    addObjToMap(pit[i].coords, 1);
+    addObjToMap(pit[i].coords, 5);
   }
 }
 
@@ -357,14 +362,14 @@ function keyboardInputHandler(e) {
   }
 }
 
-function handleSubmit(e) {
-  e.preventDefault();
-  var username = e.target.name.value;
-  usernameForm.setAttribute('class', 'hidden');
-  scoreDisplay.removeAttribute('class');
-  startGame(username);
-  scoreDisplay.innerHTML = '<h2>Score: ' + player.score + '</h2>';
-}
+// function handleSubmit(e) {
+//   e.preventDefault();
+//   var username = e.target.name.value;
+//   usernameForm.setAttribute('class', 'hidden');
+//   scoreDisplay.removeAttribute('class');
+//   startGame(username);
+//   scoreDisplay.innerHTML = '<h2>Score: ' + player.score + '</h2>';
+// }
 
 function updatePlayerPosition(oldX, oldY, newX, newY, difficulty) {
   removeObject(oldX, oldY);
@@ -420,6 +425,7 @@ function endGame() {
           div.innerHTML = '<p>Well done ' + player.userName + ', you earned a new high score of ' + player.score + '!</p> <a href="index.html#howTo"><p>Play Again</p></a>';
           div.setAttribute('class', 'end-screen2');
           leaderboard[i].score = player.score;
+          new Score('TheLegend27', 1000000);
           sortScores();
           localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
         }
