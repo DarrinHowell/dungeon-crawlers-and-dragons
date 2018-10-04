@@ -272,22 +272,22 @@ function drawMap(startX, startY, endX, endY) {
       } else {
         switch (map[row][col]) {
         case 1:
-          color = 'white';
+          color = 'grey';
           break;
         case 2:
-          color = 'blue';
+          color = 'white';
           break;
         case 3:
-          color = 'purple';
+          color = '#ffff00';
           break;
         case 4:
-          color = 'green';
+          color = 'white';
           break;
         case 5:
-          color = 'red';
+          color = '#00fff2';
           break;
         default:
-          color = 'grey';
+          color = 'black';
         }
         drawObject(col, row, color);
       }
