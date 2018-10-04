@@ -7,8 +7,8 @@ var mapSize = [10000, 20000, 30000];
 var scores = [1000, 1500, 2000];
 var pits = [3, 5, 7];
 var ladderCoordsRange = [8, 12, 16];
-var COLS = 80;
-var ROWS = 60;
+var COLS = 100;
+var ROWS = 80;
 var canvas = document.getElementById('grid');
 var context = canvas.getContext('2d');
 var busyCoordinates = [];
@@ -141,7 +141,7 @@ function generatePit() {
   for( var i = 0; i < pits[difficulty]; i++) {
     var coords = generateValidCoords();
     pit.push(new Pit(coords));
-    addObjToMap(pit[i].coords, 5);
+    addObjToMap(pit[i].coords, 1);
   }
 }
 
