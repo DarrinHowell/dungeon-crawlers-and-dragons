@@ -110,7 +110,6 @@ function createMap(mapSize, border) {
 function generatePlayer(name) {
   var coords = generateValidCoords();
   startCoords = coords;
-  console.log('Player Start Coords are :', startCoords);
   player = new Player(name, coords, scores[difficulty]);
   addObjToMap(player.coords, 2);
 }
@@ -127,7 +126,6 @@ function resetPlayer(x, y) {
 function generateLadder() {
   var coords = generateValidLadderCoords();
   ladder = new Ladder(coords);
-  console.log('ladder coords are: ', coords);
   addObjToMap(ladder.coords, 4);
 }
 

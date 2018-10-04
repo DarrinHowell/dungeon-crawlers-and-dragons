@@ -377,9 +377,11 @@ canvas  {
 }
 
 #score {
-    position: absolute;
-    left: 51vh;
-    top: 12vh;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vh;
+    text-align: center;
 }
 
 
@@ -410,12 +412,15 @@ margin-top: 10vh;
 }
 
 .end-screen1 { 
-    background: #070707;
+    background: #999;
+    border: solid 2px #E48632 ;
+    border-radius: 4px;
     display: block;
     position: relative;
     margin-top: 10vh;
     margin-left: auto;
     margin-right: auto;
+    opacity: .9;
     color: #FFF;
 	text-shadow: none; 
     padding: 1px;
@@ -427,12 +432,15 @@ margin-top: 10vh;
 }
 
 .end-screen2 { 
-    background: #070707;
+    background: #999;
+    border: solid 2px #E48632 ;
+    border-radius: 4px;
     display: block;
     position: relative;
     margin-top: 10vh;
     margin-left: auto;
     margin-right: auto;
+    opacity: .9;
     color: #FFF;
 	text-shadow: none; 
     padding: 0px;
@@ -444,29 +452,35 @@ margin-top: 10vh;
 }
 
 .end-screen3 { 
-    background: #070707;
+    background: #999;
+    border: solid 2px #E48632 ;
+    border-radius: 4px;
     display: block;
     position: relative;
     margin-top: 10vh;
     margin-left: auto;
     margin-right: auto;
+    opacity: .90;
     color: #FFF;
 	text-shadow: none; 
-    padding: 1px;
+    padding: 4px;
     z-index: 5;
     text-align: center;
-    height: 100px;
+    height: 105px;
     width: 500px;
     margin-bottom: -40vh;
 }
 
 .end-screen4 { 
-    background: #070707;
+    background: #999;
+    border: solid 2px #E48632 ;
+    border-radius: 4px;
     display: block;
     position: relative;
     margin-top: 10vh;
     margin-left: auto;
     margin-right: auto;
+    opacity: .9;
     color: #FFF;
 	text-shadow: none; 
     padding: 1px;
