@@ -6,6 +6,7 @@ var visibility = [7, 5, 3];
 var mapSize = [10000, 20000, 30000];
 var scores = [1000, 1500, 2000];
 var pits = [3, 5, 7];
+var ladderCoordsRange = [8, 12, 16];
 var COLS = 80;
 var ROWS = 60;
 var canvas = document.getElementById('grid');
@@ -109,6 +110,7 @@ function createMap(mapSize, border) {
 function generatePlayer(name) {
   var coords = generateValidCoords();
   startCoords = coords;
+  console.log('Player Start Coords are :', startCoords);
   player = new Player(name, coords, scores[difficulty]);
   addObjToMap(player.coords, 2);
 }
@@ -123,8 +125,9 @@ function resetPlayer(x, y) {
 }
 
 function generateLadder() {
-  var coords = generateValidCoords();
+  var coords = generateValidLadderCoords();
   ladder = new Ladder(coords);
+  console.log('ladder coords are: ', coords);
   addObjToMap(ladder.coords, 4);
 }
 
@@ -155,6 +158,19 @@ function generateValidCoords() {
   };
 }
 
+function generateValidLadderCoords() {
+  var x = Math.floor(Math.random() * COLS);
+  var y = Math.floor(Math.random() * ROWS);
+  while (!areLadderCoordsFree(x, y)) {
+    x = Math.floor(Math.random() * COLS);
+    y = Math.floor(Math.random() * ROWS);
+  }
+  return {
+    x: x,
+    y: y
+  };
+}
+
 function areCoordsFree(x, y) {
   if (map[y][x] !== 1) {
     return false;
@@ -170,6 +186,31 @@ function areCoordsFree(x, y) {
   }
   return true;
 }
+
+function areLadderCoordsFree(x, y) {
+  if (map[y][x] !== 1) {
+    return false;
+  }
+  for(var i = 0; i < ladderCoordsRange[difficulty]; i++){
+    if(player.coords.x + i === x ||
+        player.coords.x - i === x ||
+        player.coords.y + i === y ||
+        player.coords.y - i === y){
+      return false;
+    }
+  }
+  for (var j = 0; j < busyCoordinates.length; j++) {
+    try {
+      if (busyCoordinates[j].x === x && busyCoordinates[j].y === y) {
+        return false;
+      }
+    } catch (e) {
+      console.log('Error: ' + e);
+    }
+  }
+  return true;
+}
+
 
 function addObjToMap(coords, identifier) {
   map[coords.y][coords.x] = identifier;

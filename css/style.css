@@ -479,8 +479,14 @@ margin-top: 10vh;
 
 a p {
     background: #E48632;
+    border-radius: 2px;
     color: #FFF;
     margin: auto;
     text-decoration: none;
     width: 100px;
+}
+
+a p:hover {
+    background: #FFF;
+	color: #2B2B2B;
 }
