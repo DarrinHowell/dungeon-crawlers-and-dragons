@@ -23,3 +23,10 @@ To run this game, clone a copy of our repository, open the terminal within the l
 
 ## Running our code in developer mode
 To run this code in developer mode, checkout the "demo" branch stored in our app’s repo. This demo branch turns off the shadow obscuring the majority of the map and allows developers to see the whole map with all of its features (Features by color and name: *white tile* (moved with input from arrow keys) = player / avatar; *stationary white tile* = exit; *teal tiles* = pits; *yellow tile* = gem; *gray tiles* = walkable area; *black tiles* = boundaries.) 
+
+## Reference Images
+Copied below are images of the front-facing side of our website, the user login screen, an image of what the user sees during gameplay, and a randomly generated map created by our app. 
+
+#### Home page
+
+![The Dungeon home page](https://github.com/DarrinHowell/dungeon-crawlers-and-dragons/blob/master/README.md/img/home-page.png "home page image")
